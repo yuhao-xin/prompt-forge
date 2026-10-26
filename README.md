@@ -187,7 +187,7 @@ node eval-runner.js      # 三场景产出评估，产物存档到 eval-output/
 | 项 | 内容 |
 |---|---|
 | 作品名 | PromptForge · 提示词锻造台 |
-| 体验链接 | `https://REPLACE-WITH-YOUR-LINK.app.workbuddy.host` |
+| 体验链接 | <https://promptforge-40003.app.workbuddy.host/?sharecode=BA5KPQJNU4> |
 | 创作对话记录 | 投稿后填入 |
 | 技术特点 | 零依赖单页应用、零后端、离线可跑、数据不出浏览器 |
 | 创作方式 | 全程在 WorkBuddy 中对话式完成 |
