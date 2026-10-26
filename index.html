@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PromptForge · 提示词锻造台</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div id="app">
+
+  <header id="topbar">
+    <div class="brand">
+      <span class="brand-mark">PF</span>
+      <div class="brand-text">
+        <strong>PromptForge</strong>
+        <small>提示词锻造台 · 把你的经验，锻成带验收标准的提示词资产</small>
+      </div>
+    </div>
+    <nav class="mode-tabs">
+      <button class="mode-tab active" data-mode="forge">打磨新提示词</button>
+      <button class="mode-tab" data-mode="health">体检已有提示词</button>
+      <button class="mode-tab" data-mode="experience">我的经验库</button>
+    </nav>
+  </header>
+
+  <main id="layout">
+
+    <!-- 左栏：对话流 -->
+    <section id="chat-panel" class="panel">
+      <div id="chat-list" class="chat-list" role="log" aria-live="polite" aria-label="锻造对话"></div>
+      <div id="chat-input-area">
+        <div id="quick-actions"></div>
+        <div class="input-row">
+          <input id="chat-input" type="text" autocomplete="off"
+                 placeholder="说一句你想让 AI 做什么……（例如：帮我写一篇给新员工的入职指南）">
+          <button id="chat-send" title="发送">发送</button>
+        </div>
+        <div class="input-meta">
+          <span id="ask-counter"></span>
+          <span class="meta-btns">
+            <button id="btn-back" class="link-btn hidden">上一题</button>
+            <button id="btn-skip" class="link-btn hidden">跳过这个问题</button>
+          </span>
+        </div>
+      </div>
+    </section>
+
+    <!-- 右栏：实时提示词卡片 -->
+    <aside id="card-panel" class="panel">
+      <div id="stage-bar"></div>
+      <div id="card-body">
+        <div id="card-empty" class="card-empty">
+          <div class="empty-mark">⚒</div>
+          <p>右侧是你的<strong>实时提示词卡片</strong></p>
+          <p class="dim">在左边说出你的需求，每一个回答都会让卡片长出对应的内容——你能亲眼看到提示词被一锤一锤锻造出来。</p>
+          <div id="empty-samples" class="empty-samples"></div>
+        </div>
+        <div id="prompt-card" class="hidden"></div>
+        <div id="health-result" class="hidden"></div>
+      </div>
+      <div id="card-footer" class="hidden">
+        <div class="footer-actions">
+          <button id="btn-copy" class="btn-secondary">复制提示词</button>
+          <button id="btn-export-md" class="btn-secondary">导出 MD</button>
+          <button id="btn-export-json" class="btn-ghost">导出 JSON</button>
+        </div>
+        <div class="footer-meta">
+          <span id="variant-name"></span>
+          <button id="btn-variant" class="link-btn">换一版</button>
+        </div>
+      </div>
+    </aside>
+  </main>
+
+  <!-- 体检模式面板（覆盖左栏使用） -->
+  <section id="health-panel" class="panel hidden">
+    <div class="health-intro">
+      <h2>提示词体检</h2>
+      <p>粘贴你正在用的提示词，按<strong>角色 / 任务 / 约束 / 格式 / 示例</strong>五个维度打分（满分 10），并给出针对性补强建议。</p>
+    </div>
+    <textarea id="health-input" placeholder="把你正在用的提示词粘贴到这里……"></textarea>
+    <div class="health-actions">
+      <button id="btn-health-run" class="btn-primary">开始体检</button>
+      <span id="health-hint" class="dim">纯本地检测，内容不出浏览器</span>
+    </div>
+  </section>
+
+  <!-- 经验库面板 -->
+  <section id="experience-panel" class="panel hidden">
+    <div class="health-intro">
+      <h2>我的经验库</h2>
+      <p>每次锻造完成后，你亲口回答的偏好会沉淀在这里。下次开炉时自动预填，并标注<strong>来自经验</strong>——用得越久，问得越少。</p>
+    </div>
+    <div id="experience-body"></div>
+    <div class="health-actions">
+      <button id="btn-exp-export" class="btn-secondary">导出经验库 JSON</button>
+      <button id="btn-exp-import" class="btn-secondary">导入经验库</button>
+      <button id="btn-exp-clear" class="btn-ghost">清空经验库</button>
+      <span class="dim">数据只存在你的浏览器里</span>
+    </div>
+    <textarea id="exp-import-input" class="hidden" placeholder="把导出的 JSON 粘贴到这里，再点「导入经验库」……"></textarea>
+  </section>
+
+</div>
+<div id="toast" class="hidden"></div>
+
+<script src="data.js"></script>
+<script src="storage.js"></script>
+<script src="experience.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
